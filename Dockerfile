@@ -8,7 +8,7 @@ COPY setup.py "$WORKDIR/setup.py"
 COPY raster_analysis "$WORKDIR/raster_analysis"
 
 RUN mkdir -p $WORKDIR
-RUN CFLAGS="--std=c99" pip3 install . --no-binary numpy,rasterio,shaply -t $WORKDIR -U
+RUN CFLAGS="--std=c99" pip3 install . --no-binary numpy,rasterio,shapely -t $WORKDIR -U
 
 RUN python -m compileall .
 RUN find -type f -name '*.pyc' | while read f; do n=$(echo $f | sed 's/__pycache__\///' | sed 's/.cpython-36//'); cp $f $n; done;
