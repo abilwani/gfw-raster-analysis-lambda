@@ -143,7 +143,13 @@ Build Docker image
 
 Copy lambda package from Docker file
 
-`docker cp <docker containter id>:/var/task/lambda.zip lambda.zip`
+```
+docker run --name lambda -itd gfw/raster-analysis-lambda /bin/bash
+docker cp lambda:/tmp/package.zip package.zip
+docker stop lambda
+docker rm lambda
+```
+
 
 Deploy lambda function by uploading ZIP archive to AWS using cli, console or any other deployment method.
 To enable HTTP requests, you will need to add the lambda function to an API Gateway.
@@ -151,7 +157,7 @@ To enable HTTP requests, you will need to add the lambda function to an API Gate
 When deploying the function use the following settings:
 
 ```
-Runtime: Python 3.7
+Runtime: Python 3.6
 Handler: lambda_function.lambda_handler
 ```
 
